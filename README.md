@@ -13,3 +13,6 @@ Gpasteboard can store and set pieces of text and
 can store, set and save pictures. It can show the 
 preview of the stored items, can delete each entry
 or the whole history.
+
+![My image](https://github.com/frank038/gpasteboard/blob/master/Screen1.png)
+![My image](https://github.com/frank038/gpasteboard/blob/master/Screen2.png)
