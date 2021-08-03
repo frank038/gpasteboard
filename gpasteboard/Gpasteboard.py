@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-# V. 1.3.1
+# V. 1.3.2
 
 import gi
 gi.require_version('Gtk', '3.0')
@@ -77,12 +77,12 @@ class MainWindow(Gtk.Window):
         self.grid.set_column_homogeneous(True)
         self.hbox.pack_start(self.grid, False, False, 1)
 
-        self.label1 = Gtk.Label("<b>0</b> in history")
+        self.label1 = Gtk.Label(label="<b>0</b> in history")
         self.label1.set_use_markup(True)
         self.grid.attach(self.label1, 0, 0, 1, 1)
         self.grid.set_row_spacing(30)
         
-        self.label0 = Gtk.Label("<b>0</b> image(s)")
+        self.label0 = Gtk.Label(label="<b>0</b> image(s)")
         self.label0.set_use_markup(True)
         self.grid.attach(self.label0, 0, 1, 1, 1)
       
@@ -103,7 +103,7 @@ class MainWindow(Gtk.Window):
         
         self.page1 = Gtk.Box()
         self.page1.set_border_width(10)
-        self.notebook.append_page(self.page1, Gtk.Label('Text'))
+        self.notebook.append_page(self.page1, Gtk.Label(label='Text'))
 
         self.scrolledwindow = Gtk.ScrolledWindow()
         self.scrolledwindow.set_hexpand(True)
@@ -147,8 +147,8 @@ class MainWindow(Gtk.Window):
             row = Gtk.ListBoxRow()
             hbox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=0)
             row.add(hbox)
-            n_label = Gtk.Label(XALIGN)
-            n_label.modify_font(Pango.FontDescription.from_string("Mono"))
+            n_label = Gtk.Label(label=XALIGN)
+            # n_label.modify_font(Pango.FontDescription.from_string("Mono"))
             label = Gtk.Label(xalign=0)
             label.set_single_line_mode(True)
             n_label.set_text("{0:>3n}.".format(q+1))
