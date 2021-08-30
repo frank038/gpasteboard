@@ -14,5 +14,8 @@ can store, set and save pictures. It can show the
 preview of the stored items, can delete each entry
 or the whole history.
 
+As default option, the path names of the copied file and folders are stored no more.
+This behaviour can be changed at the beginning of the file.
+
 ![My image](https://github.com/frank038/gpasteboard/blob/master/Screen1.png)
 ![My image](https://github.com/frank038/gpasteboard/blob/master/Screen2.png)
