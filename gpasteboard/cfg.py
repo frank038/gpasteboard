@@ -2,6 +2,8 @@
 SKIP_FILES = 1
 # clipboard text alignment: 0 left - 1 right
 XALIGN = 0
+# test size preview 
+CHAR_PREVIEW=30
 # max size of each clip to store: # of characters
 CLIP_MAX_SIZE=500
 # store images: 0 no - 1 yes

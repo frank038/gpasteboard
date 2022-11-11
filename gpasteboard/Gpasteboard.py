@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-# V. 1.9
+# V. 1.9.1
 ############
 
 from cfg import *
@@ -172,7 +172,12 @@ class MainWindow(Gtk.Window):
             iitem_text = tfile.readlines()[0]
             tfile.close()
             #
-            label.set_text(str(iitem_text))
+            if len(str(iitem_text)) > CHAR_PREVIEW:
+                # label.set_text(str(iitem_text)[0:int(CHAR_PREVIEW)].replace("\n", " "+u'\u00AC'+" ")+" [...]")
+                label.set_text(str(iitem_text)[0:int(CHAR_PREVIEW)]+" [...]")
+            else:
+                # label.set_text(str(iitem_text).replace("\n", " "+u'\u00AC'+" "))
+                label.set_text(str(iitem_text))
             button = Gtk.Button()
             iicon = Gio.ThemedIcon(name="list-remove")
             iimage = Gtk.Image.new_from_gicon(iicon, Gtk.IconSize.BUTTON)
