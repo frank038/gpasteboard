@@ -1,5 +1,6 @@
 (Python) Gtk3 GNU/Linux Clipboard.
 
+Free to use and modify.
 
 Gpasteboard is a clipboard program for Linux.
 The main program and its applet are built using
