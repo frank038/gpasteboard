@@ -110,6 +110,7 @@ for iitem in sorted(clips_temp, reverse=False):
     tfile.close()
     #
     if len(iitem_text) > int(CHAR_PREVIEW):
+        text_prev = iitem_text[0:int(CHAR_PREVIEW)]+" [...]"
         CLIPS_DICT[iitem] = text_prev
     else:
         CLIPS_DICT[iitem] = iitem_text
