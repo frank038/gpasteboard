@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-# V. 1.9.2
+# V. 1.9.3
 ############
 
 from cfg import *
@@ -173,7 +173,10 @@ class MainWindow(Gtk.Window):
             iitem_text = tfile.readlines()[0]
             tfile.close()
             #
-            label.set_text(iitem_text)
+            if len(iitem_text) > int(CHAR_PREVIEW):
+                label.set_text(iitem_text[0:int(CHAR_PREVIEW)]+" [...]")
+            else:
+                label.set_text(iitem_text)
             #
             button = Gtk.Button()
             iicon = Gio.ThemedIcon(name="list-remove")
