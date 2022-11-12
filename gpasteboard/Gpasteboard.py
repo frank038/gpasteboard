@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-# V. 1.9.3
+# V. 1.9.5
 ############
 
 from cfg import *
@@ -97,6 +97,23 @@ HH = WINH
 DWW = DWINW
 DWH = DWINH
 
+# store each preview
+CLIPS_DICT = {}
+
+### clips
+clips_temp = os.listdir(clips_path)
+
+for iitem in sorted(clips_temp, reverse=False):
+    iitem_text = ""
+    tfile = open(os.path.join(clips_path, iitem), "r")
+    iitem_text = tfile.readlines()[0]
+    tfile.close()
+    #
+    if len(iitem_text) > int(CHAR_PREVIEW):
+        CLIPS_DICT[iitem] = text_prev
+    else:
+        CLIPS_DICT[iitem] = iitem_text
+
 class MainWindow(Gtk.Window):
 
     def __init__(self):
@@ -158,9 +175,12 @@ class MainWindow(Gtk.Window):
         q = 0   
         iq = 0   
         ### clips
-        clips_temp = os.listdir(clips_path)
+        # clips_temp = os.listdir(clips_path)
         #
-        for iitem in sorted(clips_temp, reverse=True):
+        # for iitem in sorted(clips_temp, reverse=True):
+        list_items = sorted(CLIPS_DICT, reverse=True)
+        for iitem in list_items:
+            iitem_text = CLIPS_DICT[iitem]
             row = Gtk.ListBoxRow()
             hbox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=0)
             row.add(hbox)
@@ -168,15 +188,18 @@ class MainWindow(Gtk.Window):
             label.set_single_line_mode(True)
             label.set_ellipsize(3)
             #
-            iitem_text = ""
-            tfile = open(os.path.join(clips_path, iitem), "r")
-            iitem_text = tfile.readlines()[0]
-            tfile.close()
+            # iitem_text = ""
+            # tfile = open(os.path.join(clips_path, iitem), "r")
+            # iitem_text = tfile.readlines()[0]
+            # tfile.close()
+            # #
+            # if len(iitem_text) > int(CHAR_PREVIEW):
+                # text_prev = iitem_text[0:int(CHAR_PREVIEW)]+" [...]"
+                # label.set_text(text_prev)
+            # else:
+                # label.set_text(iitem_text)
             #
-            if len(iitem_text) > int(CHAR_PREVIEW):
-                label.set_text(iitem_text[0:int(CHAR_PREVIEW)]+" [...]")
-            else:
-                label.set_text(iitem_text)
+            label.set_text(iitem_text)
             #
             button = Gtk.Button()
             iicon = Gio.ThemedIcon(name="list-remove")
@@ -341,6 +364,7 @@ class MainWindow(Gtk.Window):
             new_clip_file = str(int(time()))
             try:
                 os.remove(os.path.join(clips_path, clip_file))
+                del CLIPS_DICT[clip_file]
             except:
                 self.on_row_clicked2()
                 self.destroy()
@@ -391,6 +415,7 @@ class MainWindow(Gtk.Window):
         #
         try:
             os.remove(os.path.join(clips_path, clip_file))
+            del CLIPS_DICT[clip_file]
         except:
             return
         #
@@ -496,6 +521,7 @@ class MainWindow(Gtk.Window):
         try:
             for tt in clip_files:
                 os.remove(os.path.join(clips_path, tt))
+                del CLIPS_DICT[tt]
             for tt in image_files:
                 os.remove(os.path.join(images_path, tt))
         except:
@@ -568,6 +594,12 @@ class DaemonClip():
                     try:
                         with open(os.path.join(clips_path, time_now), "w") as ffile:
                             ffile.write(ttext)
+                        # store the preview for faster loading
+                        if len(ttext) > int(CHAR_PREVIEW):
+                            text_prev = ttext[0:int(CHAR_PREVIEW)]+" [...]"
+                        else:
+                            text_prev = ttext
+                        CLIPS_DICT[time_now] = text_prev
                     except:
                         pass
                     #
