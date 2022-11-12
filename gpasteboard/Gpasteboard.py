@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 
-# V. 1.9.1
+# V. 1.9.2
 ############
 
 from cfg import *
 
 import gi
 gi.require_version('Gtk', '3.0')
-from gi.repository import Gtk, Gdk, Gio, Pango
+from gi.repository import Gtk, Gdk, Gio
 if STORE_IMAGES:
     from gi.repository.GdkPixbuf import Pixbuf
 import os
@@ -166,18 +166,15 @@ class MainWindow(Gtk.Window):
             row.add(hbox)
             label = Gtk.Label(xalign=XALIGN)
             label.set_single_line_mode(True)
+            label.set_ellipsize(3)
             #
             iitem_text = ""
             tfile = open(os.path.join(clips_path, iitem), "r")
             iitem_text = tfile.readlines()[0]
             tfile.close()
             #
-            if len(str(iitem_text)) > CHAR_PREVIEW:
-                # label.set_text(str(iitem_text)[0:int(CHAR_PREVIEW)].replace("\n", " "+u'\u00AC'+" ")+" [...]")
-                label.set_text(str(iitem_text)[0:int(CHAR_PREVIEW)]+" [...]")
-            else:
-                # label.set_text(str(iitem_text).replace("\n", " "+u'\u00AC'+" "))
-                label.set_text(str(iitem_text))
+            label.set_text(iitem_text)
+            #
             button = Gtk.Button()
             iicon = Gio.ThemedIcon(name="list-remove")
             iimage = Gtk.Image.new_from_gicon(iicon, Gtk.IconSize.BUTTON)
@@ -557,7 +554,8 @@ class DaemonClip():
                 if ttext != tclipb or ftext == "":
                     time_now = str(int(time()))
                     i = 0
-                    while os.path.exists(time_now):
+                    while os.path.exists(os.path.join(clips_path, time_now)):
+                        sleep(0.1)
                         time_now = str(int(time()))
                         i += 1
                         if i == 10:
@@ -572,7 +570,7 @@ class DaemonClip():
                     #
                     tclipb = ttext
                     ftext = ttext
-                    # remove redundand clips
+                    # remove redundand clipboards
                     list_clips = sorted(os.listdir(clips_path), reverse=True)
                     num_clips = len(list_clips)
                     #
@@ -589,6 +587,7 @@ class DaemonClip():
                 #
                 i = 0
                 while os.path.exists(os.path.join(images_path, image_name)):
+                    sleep(0.1)
                     ttime = int(time())
                     image_name = str(ttime)+".tiff"
                     i += 1
@@ -626,7 +625,13 @@ DaemonClip()
 class StatusIcon:
     def __init__(self):
         self.status_icon = Gtk.StatusIcon()
-        self.status_icon.set_from_file("gpasteboard.png")
+        if TRAY_ICON_THEME == 0:
+            self.TRAY_ICON = os.path.join(ccdir, "gpasteboard.png")
+            self.TRAY_ICON_STOP = os.path.join(ccdir, "gpasteboard-stop.png")
+        elif TRAY_ICON_THEME == 1:
+            self.TRAY_ICON = os.path.join(ccdir, "gpasteboard2.png")
+            self.TRAY_ICON_STOP = os.path.join(ccdir, "gpasteboard-stop2.png")
+        self.status_icon.set_from_file(self.TRAY_ICON)
         self.status_icon.connect("popup-menu", self.on_right_click)
         self.status_icon.connect('activate', self.on_left_click)
    
@@ -658,9 +663,9 @@ class StatusIcon:
         if data:
             if main_window == True:
                 data = False
-                self.status_icon.set_from_file("gpasteboard-stop.png")
+                self.status_icon.set_from_file(self.TRAY_ICON_STOP)
         else:
-            self.status_icon.set_from_file("gpasteboard.png")
+            self.status_icon.set_from_file(self.TRAY_ICON)
             data = True
 
 
