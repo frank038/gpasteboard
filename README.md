@@ -4,7 +4,7 @@ Free to use and modify.
 
 Gpasteboard is a clipboard program for Linux.
 The main program and its applet are built using
-Python (version 3) and the Gtk3 libraries. 
+Python3 and the Gtk3 libraries. 
 No additional modules are required.
 
 Gpasteboard can store and set pieces of text and
