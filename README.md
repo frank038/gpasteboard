@@ -17,7 +17,7 @@ This behaviour, and other settings, can be changed in the config file.
 
 To execute this program from terminal:
 ./gpasteboard.sh
-or
+or 
 python3 Gpasteboard.py
 
 ![My image](https://github.com/frank038/gpasteboard/blob/master/Screen1.png)
