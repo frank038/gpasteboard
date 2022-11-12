@@ -15,10 +15,11 @@ or the whole history.
 As default option, the path names of the copied files and folders are not stored.
 This behaviour, and other settings, can be changed in the config file.
 
-To execute this program from terminal:
+To execute this program from the terminal:
 ./gpasteboard.sh
-or 
+or
 python3 Gpasteboard.py
 
 ![My image](https://github.com/frank038/gpasteboard/blob/master/Screen1.png)
+
 ![My image](https://github.com/frank038/gpasteboard/blob/master/Screen2.png)
