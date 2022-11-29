@@ -563,7 +563,10 @@ class DaemonClip():
     
     def callback1(self, clipboard, text, data):
         if text:
-            if len(text) < CLIP_MAX_SIZE:
+            if CLIP_MAX_SIZE:
+                if len(text) <= CLIP_MAX_SIZE:
+                    self.ccontent(text, None)
+            else:
                 self.ccontent(text, None)
         
     def callback2(self, clipboard, pixbuf, data):
