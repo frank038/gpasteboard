@@ -2,10 +2,10 @@
 SKIP_FILES = 1
 # clipboard text alignment: 0 left - 1 right
 XALIGN = 0
-# test size preview 
+# text size preview 
 CHAR_PREVIEW=50
 # number of characters for the clipboard to be stored
-CLIP_MAX_SIZE=500
+CLIP_MAX_SIZE=1000
 # store images: 0 no - 1 yes
 STORE_IMAGES=1
 # history size - clipboards: older clipboards will be removed

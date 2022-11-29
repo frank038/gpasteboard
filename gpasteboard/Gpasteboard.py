@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-# V. 1.9.5
+# V. 2.0
 ############
 
 from cfg import *
@@ -106,7 +106,7 @@ clips_temp = os.listdir(clips_path)
 for iitem in sorted(clips_temp, reverse=False):
     iitem_text = ""
     tfile = open(os.path.join(clips_path, iitem), "r")
-    iitem_text = tfile.readlines()[0]
+    iitem_text = tfile.read()
     tfile.close()
     #
     if len(iitem_text) > int(CHAR_PREVIEW):
@@ -114,6 +114,8 @@ for iitem in sorted(clips_temp, reverse=False):
         CLIPS_DICT[iitem] = text_prev
     else:
         CLIPS_DICT[iitem] = iitem_text
+
+########## clipboard window
 
 class MainWindow(Gtk.Window):
 
@@ -191,7 +193,7 @@ class MainWindow(Gtk.Window):
             #
             # iitem_text = ""
             # tfile = open(os.path.join(clips_path, iitem), "r")
-            # iitem_text = tfile.readlines()[0]
+            # iitem_text = tfile.read()
             # tfile.close()
             # #
             # if len(iitem_text) > int(CHAR_PREVIEW):
@@ -346,7 +348,7 @@ class MainWindow(Gtk.Window):
         copy_iitem_text = ""
         try:
             tfile = open(os.path.join(clips_path, clip_file), "r")
-            copy_iitem_text = tfile.readlines()[0]
+            copy_iitem_text = tfile.read()
             tfile.close()
         except:
             return
@@ -404,7 +406,7 @@ class MainWindow(Gtk.Window):
         copy_iitem_text = ""
         try:
             tfile = open(os.path.join(clips_path, clip_file), "r")
-            copy_iitem_text = tfile.readlines()[0]
+            copy_iitem_text = tfile.read()
             tfile.close()
         except:
             return
@@ -450,7 +452,7 @@ class MainWindow(Gtk.Window):
         copy_iitem_text = ""
         try:
             tfile = open(os.path.join(clips_path, clip_file), "r")
-            copy_iitem_text = tfile.readlines()
+            copy_iitem_text = tfile.read()
             tfile.close()
         except:
             return
@@ -537,7 +539,7 @@ class MainWindow(Gtk.Window):
         self.destroy()
 
 
-## applet and daemon
+########## daemon
 
 ftext = ""
 text = ""   
@@ -657,7 +659,8 @@ class DaemonClip():
 DaemonClip()
 
 
-################### Tray icon
+################### Tray applet
+
 class StatusIcon:
     def __init__(self):
         self.status_icon = Gtk.StatusIcon()
