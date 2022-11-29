@@ -15,6 +15,8 @@ or the whole history.
 As default option, the path names of the copied files and folders are not stored.
 This behaviour, and other settings, can be changed in the config file.
 
+This program has an option that discharges all text over a certain lenght (actually 1000 characters), unless this option is setted to 0.
+
 To execute this program from the terminal:
 ./gpasteboard.sh
 or
