@@ -17,7 +17,7 @@ This behaviour, and other settings, can be changed in the config file.
 
 This program has an option that discharges all text over a certain lenght (actually 1000 characters), unless this option is setted to 0.
 
-All clipboards are stored in text files, that can be modified with a text editor; because this program store statically the previews internally (instead of the full texts for fast loading and less resources usage), after a modification of the files, this program needs to be restarted to update the previews.
+All clipboards are stored in text files, that can be modified with a text editor; because this program store statically the mini previews internally (instead of the full texts for fast loading and less resources usage), after a modification of the files, this program needs to be restarted to update the mini previews.
 
 To execute this program from the terminal:
 ./gpasteboard.sh
